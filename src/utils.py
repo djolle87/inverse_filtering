@@ -11,7 +11,7 @@ def load_audio_file(file_path):
     :param file_path: File path.
     :return: audio signal and its sampling rate.
     """
-    audio_file, sampling_rate = librosa.load(file_path, sr=None, mono=True, offset=0.0, duration=None)
+    audio_file, sampling_rate = librosa.load(file_path, sr=None, mono=True, offset=0.0)
     return audio_file, sampling_rate
 
 
@@ -20,6 +20,7 @@ def fft_plot(audio_signal, sampling_rate, title=None):
     This function returns fft plot.
     :param audio_signal: Input audio signal.
     :param sampling_rate: Sampling frequency.
+    :param title: Plot title.
     :return: Plot.
     """
     n = len(audio_signal)
@@ -29,7 +30,7 @@ def fft_plot(audio_signal, sampling_rate, title=None):
     xf = np.linspace(0.0, 1.0 / (2.0 * T), int(n / 2))
 
     fig, ax = plt.subplots(figsize=(15, 5))
-    ax.plot(xf, 2.0 / n * np.abs(yf[:n // 2]))
+    ax.plot(xf, 2.0 / n * np.abs(yf[: n // 2]))
     plt.grid()
     plt.title(title)
     plt.xlabel("Frequency")
@@ -43,6 +44,7 @@ def wave_plot(audio_signal, sampling_rate, title=None):
     This function returns waveform plot.
     :param audio_signal: Input audio signal.
     :param sampling_rate: Sampling frequency.
+    :param title: Plot title.
     :return: Plot.
     """
     plt.figure(figsize=(15, 5))
